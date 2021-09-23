@@ -7,8 +7,9 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
@@ -27,7 +28,7 @@
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
                 app:endIconDrawable="@drawable/ic_wikipedia"
-                app:endIconMode="custom"
+                app:endIconMode="clear_text"
                 app:helperText="@string/wiki_helper_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +85,7 @@
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
+        android:visibility="gone"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,6 +95,36 @@
         android:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
+        android:visibility="gone"
         app:tint="#FFFFFF" />
+
+    <FrameLayout
+        android:id="@+id/mainFragmentLoadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/mainFragmentErrorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="34dp"
+            android:id="@+id/txt_error"/>
+    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

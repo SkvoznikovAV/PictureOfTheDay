@@ -7,6 +7,7 @@ import geekbarains.material.BuildConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Thread.sleep
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
@@ -21,6 +22,7 @@ class PictureOfTheDayViewModel(
 
     private fun sendServerRequest() {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
+
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             PictureOfTheDayData.Error(Throwable("You need API key"))

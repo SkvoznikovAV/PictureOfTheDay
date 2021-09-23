@@ -30,15 +30,13 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getData()
-            .observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //return inflater.inflate(R.layout.main_fragment, container, false)
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,7 +49,9 @@ class PictureOfTheDayFragment : Fragment() {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
             })
         }
-        setBottomAppBar(view)
+        viewModel.getData()
+            .observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        //setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,31 +72,36 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun renderData(data: PictureOfTheDayData) {
+    private fun renderData(data: PictureOfTheDayData) = with (binding) {
         when (data) {
             is PictureOfTheDayData.Success -> {
+                mainFragmentLoadingLayout.visibility = View.GONE
+                mainFragmentErrorLayout.visibility = View.GONE
+                nestedScrollView.visibility = View.VISIBLE
+
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
-                    //showError("Сообщение, что ссылка пустая")
-                    toast("Link is empty")
+                    toast(getString(R.string.msg_linkisempty))
                 } else {
-                    //showSuccess()
                     image_view.load(url) {
                         lifecycle(this@PictureOfTheDayFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
-                    binding.imgTitle.text=serverResponseData.title
-                    binding.imgExplanation.text=serverResponseData.explanation
+                    //imgTitle.text=serverResponseData.title
+                    //imgExplanation.text=serverResponseData.explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                //showLoading()
+                nestedScrollView.visibility = View.GONE
+                mainFragmentLoadingLayout.visibility = View.VISIBLE
             }
             is PictureOfTheDayData.Error -> {
-                //showError(data.error.message)
-                toast(data.error.message)
+                mainFragmentLoadingLayout.visibility = View.GONE
+                mainFragmentErrorLayout.visibility = View.VISIBLE
+
+                txtError.text=String.format("%s %s",getString(R.string.str_prefix_error),data.error.message)
             }
         }
     }
