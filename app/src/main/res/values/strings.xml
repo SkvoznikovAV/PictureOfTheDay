@@ -14,4 +14,8 @@
     <string name="msg_loading">loading...</string>
     <string name="msg_linkisempty">Link is empty</string>
     <string name="str_prefix_error">Ошибка:</string>
+    <string name="menu_1">действие 1</string>
+    <string name="menu_2">действие 2</string>
+    <string name="msg_like">Поставили лайк</string>
+    <string name="settings_header">Настройки</string>
 </resources>

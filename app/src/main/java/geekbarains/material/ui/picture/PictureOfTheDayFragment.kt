@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,21 +15,17 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.databinding.MainFragmentBinding
 import geekbarains.material.ui.MainActivity
-import geekbarains.material.ui.chips.ChipsFragment
+import geekbarains.material.ui.SettingsFragment
+import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProviders.of(this).get(PictureOfTheDayViewModel::class.java)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -43,7 +38,12 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        setBottomSheetBehavior(view.findViewById(R.id.bottomSheetContainer))
+
+        childFragmentManager.beginTransaction()
+            .replace(R.id.bottomSheetContainer, BottomSheetFragment())
+            .commitNow()
+
         input_layout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
@@ -51,7 +51,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
         viewModel.getData()
             .observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
-        //setBottomAppBar(view)
+        setBottomAppBar(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -61,8 +61,8 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast("Favourite")
-            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+            R.id.app_bar_fav -> toast(getString(R.string.msg_like))
+            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
@@ -77,7 +77,8 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayData.Success -> {
                 mainFragmentLoadingLayout.visibility = View.GONE
                 mainFragmentErrorLayout.visibility = View.GONE
-                nestedScrollView.visibility = View.VISIBLE
+                mainFragmentPictureLayout.visibility = View.VISIBLE
+                bottomSheetContainer.visibility = View.VISIBLE
 
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
@@ -89,15 +90,19 @@ class PictureOfTheDayFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
-                    //imgTitle.text=serverResponseData.title
-                    //imgExplanation.text=serverResponseData.explanation
+                    bottom_sheet_description_header.text = serverResponseData.title
+                    bottom_sheet_description.text = serverResponseData.explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                nestedScrollView.visibility = View.GONE
+                mainFragmentPictureLayout.visibility = View.GONE
+                bottomSheetContainer.visibility = View.GONE
+                mainFragmentErrorLayout.visibility = View.GONE
                 mainFragmentLoadingLayout.visibility = View.VISIBLE
             }
             is PictureOfTheDayData.Error -> {
+                mainFragmentPictureLayout.visibility = View.GONE
+                bottomSheetContainer.visibility = View.GONE
                 mainFragmentLoadingLayout.visibility = View.GONE
                 mainFragmentErrorLayout.visibility = View.VISIBLE
 
@@ -128,7 +133,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+    private fun setBottomSheetBehavior(bottomSheet: View) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
