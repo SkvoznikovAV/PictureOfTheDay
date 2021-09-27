@@ -34,27 +34,32 @@ class PictureOfTheDayFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun setPictureDescriptionBottomSheet(view : View) {
         pictureDescriptionBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.pictureOfTheDayDescriptionContainer))
         pictureDescriptionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
-        with (binding){
-            childFragmentManager.beginTransaction()
-                .replace(R.id.pictureOfTheDayDescriptionContainer, PictureDescriptionFragment())
-                .commitNow()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.pictureOfTheDayDescriptionContainer, PictureDescriptionFragment())
+            .commitNow()
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setPictureDescriptionBottomSheet(view)
+        setBottomAppBar(view)
+        setInputWiki()
+
+        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
+    private fun setInputWiki() {
+        with (binding){
             inputWiki.setEndIconOnClickListener {
                 startActivity(Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse("https://en.wikipedia.org/wiki/${input_wiki_edit_text.text.toString()}")
                 })
             }
-
-            viewModel.getData()
-                .observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
-
-            setBottomAppBar(view)
         }
     }
 
