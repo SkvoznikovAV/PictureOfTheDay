@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.model
 
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor

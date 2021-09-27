@@ -1,4 +1,6 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.entities
+
+import geekbarains.material.model.PODServerResponseData
 
 sealed class PictureOfTheDayData {
     data class Success(val serverResponseData: PODServerResponseData) : PictureOfTheDayData()

@@ -1,13 +1,15 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import geekbarains.material.BuildConfig
+import geekbarains.material.model.PODRetrofitImpl
+import geekbarains.material.model.PODServerResponseData
+import geekbarains.material.ui.entities.PictureOfTheDayData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Thread.sleep
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),

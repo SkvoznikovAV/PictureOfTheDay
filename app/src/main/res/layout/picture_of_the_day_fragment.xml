@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/mainFragmentPictureLayout"
+        android:id="@+id/pictureOfTheDayLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +18,7 @@
             android:paddingEnd="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout"
+                android:id="@+id/input_wiki"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_edit_text"
+                    android:id="@+id/input_wiki_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -49,13 +49,13 @@
                 android:contentDescription="@string/photo_of_the_day_stub"
                 android:layout_marginTop="60dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_layout"
+                app:layout_constraintTop_toBottomOf="@+id/input_wiki"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
-        android:id="@+id/bottomSheetContainer"
+        android:id="@+id/pictureOfTheDayDescriptionContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="false"
@@ -63,7 +63,7 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
+        android:id="@+id/picture_of_the_day_bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -74,18 +74,8 @@
         android:visibility="visible"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        app:layout_anchor="@id/bottom_app_bar"
-        app:srcCompat="@drawable/ic_plus_fab"
-        android:visibility="visible"
-        app:tint="#FFFFFF" />
-
     <FrameLayout
-        android:id="@+id/mainFragmentLoadingLayout"
+        android:id="@+id/pictureOfTheDayLoadingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -99,7 +89,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/mainFragmentErrorLayout"
+        android:id="@+id/pictureOfTheDayErrorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
@@ -109,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="34dp"
+            android:textSize="@dimen/txt_error_size"
             android:id="@+id/txt_error"/>
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

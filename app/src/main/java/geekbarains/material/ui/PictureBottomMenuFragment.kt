@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import geekbarains.material.R
 import kotlinx.android.synthetic.main.bottom_navigation_layout.*
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class PictureBottomMenuFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

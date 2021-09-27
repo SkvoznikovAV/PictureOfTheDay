@@ -3,7 +3,6 @@ package geekbarains.material.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import geekbarains.material.R
-import geekbarains.material.ui.picture.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
 
