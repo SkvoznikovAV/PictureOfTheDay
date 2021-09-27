@@ -13,7 +13,6 @@ class PictureDescriptionFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.picture_of_the_day_description,container,false)
     }
 }
