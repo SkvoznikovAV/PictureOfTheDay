@@ -27,7 +27,7 @@ class PictureOfTheDayViewModel(
 
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            PictureOfTheDayData.Error(Throwable("You need API key"))
+            liveDataForViewToObserve.value = PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object : Callback<PODServerResponseData> {
                 override fun onResponse(
@@ -35,16 +35,13 @@ class PictureOfTheDayViewModel(
                     response: Response<PODServerResponseData>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-                        liveDataForViewToObserve.value =
-                            PictureOfTheDayData.Success(response.body()!!)
+                        liveDataForViewToObserve.value = PictureOfTheDayData.Success(response.body()!!)
                     } else {
                         val message = response.message()
                         if (message.isNullOrEmpty()) {
-                            liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable("Unidentified error"))
+                            liveDataForViewToObserve.value = PictureOfTheDayData.Error(Throwable("Unidentified error"))
                         } else {
-                            liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable(message))
+                            liveDataForViewToObserve.value = PictureOfTheDayData.Error(Throwable(message))
                         }
                     }
                 }
