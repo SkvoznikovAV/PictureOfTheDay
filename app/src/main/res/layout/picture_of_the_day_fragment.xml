@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?backgroundWindow"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,6 +25,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/search_wiki"
                 app:counterEnabled="true"
+                android:textColorHint="@color/color_black"
+                app:helperTextTextColor="@color/color_black"
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
                 app:endIconDrawable="@drawable/ic_wikipedia"
@@ -67,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?colorPrimary"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"

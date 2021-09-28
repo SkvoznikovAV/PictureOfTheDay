@@ -18,4 +18,8 @@
     <string name="menu_2">действие 2</string>
     <string name="msg_like">Поставили лайк</string>
     <string name="settings_header">Настройки</string>
+    <string name="txt_choice_theme">Тема приложения</string>
+    <string name="txt_earth_theme">Земная тема</string>
+    <string name="txt_moon_theme">Лунная тема</string>
+    <string name="txt_mars_theme">Марсианская тема</string>
 </resources>

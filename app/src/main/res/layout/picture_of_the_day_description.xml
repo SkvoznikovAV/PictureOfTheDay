@@ -6,7 +6,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ededed">
+    android:background="?backgroundBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="25dp"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
-            android:background="#663b4351"
+            android:background="@color/color_sheet_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +33,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:textColor="#000"
+            android:textSize="@dimen/description_header_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingStart="10dp"
+            android:textColor="#000"
+            android:textSize="@dimen/description_body_size"
             android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

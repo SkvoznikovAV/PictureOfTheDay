@@ -1,10 +1,42 @@
 <resources>
+    <style name="AppEarthTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryEarth</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryEarthDark</item>
+        <item name="colorAccent">@color/colorAccentEarth</item>
+        <item name="backgroundWindow">@color/colorWindowBackgroundEarth</item>
+        <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetEarth</item>
+        <item name="backgroundChipsOn">@color/colorBackgroundChipsOnEarth</item>
+        <item name="backgroundChipsOff">@color/colorBackgroundChipsOffEarth</item>
+        <item name="colorTextChipsOn">@color/colorTextChipsOnEarth</item>
+        <item name="colorTextChipsOff">@color/colorTextChipsOffEarth</item>
+    </style>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppMarsTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryMars</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryMarsDark</item>
+        <item name="colorAccent">@color/colorAccentMars</item>
+        <item name="backgroundWindow">@color/colorWindowBackgroundMars</item>
+        <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetMars</item>
+        <item name="backgroundChipsOn">@color/colorBackgroundChipsOnMars</item>
+        <item name="backgroundChipsOff">@color/colorBackgroundChipsOffMars</item>
+        <item name="colorTextChipsOn">@color/colorTextChipsOnMars</item>
+        <item name="colorTextChipsOff">@color/colorTextChipsOffMars</item>
+    </style>
+
+    <style name="AppMoonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryMoon</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryMoonDark</item>
+        <item name="colorAccent">@color/colorAccentMoon</item>
+        <item name="backgroundWindow">@color/colorWindowBackgroundMoon</item>
+        <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetMoon</item>
+        <item name="backgroundChipsOn">@color/colorBackgroundChipsOnMoon</item>
+        <item name="backgroundChipsOff">@color/colorBackgroundChipsOffMoon</item>
+        <item name="colorTextChipsOn">@color/colorTextChipsOnMoon</item>
+        <item name="colorTextChipsOff">@color/colorTextChipsOffMoon</item>
+    </style>
+
+    <style name="ChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background_chip_state_list</item>
+        <item name="android:textColor">@color/text_color_chip_state_list</item>
     </style>
 </resources>

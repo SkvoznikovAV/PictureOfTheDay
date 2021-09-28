@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="?backgroundWindow"
     android:orientation="vertical">
 
     <TextView
@@ -10,6 +12,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textColor="#000"
+        android:textSize="@dimen/settings_header_size"
         android:text="@string/settings_header" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="#000"
+        android:text="@string/txt_choice_theme"
+        android:textSize="18sp" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupThemes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipEarthTheme"
+            style="@style/ChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_earth_theme" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMoonTheme"
+            style="@style/ChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_moon_theme" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMarsTheme"
+            style="@style/ChipChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_mars_theme" />
+    </com.google.android.material.chip.ChipGroup>
 </LinearLayout>
