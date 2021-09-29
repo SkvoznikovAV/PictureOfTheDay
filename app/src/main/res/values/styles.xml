@@ -39,4 +39,17 @@
         <item name="chipBackgroundColor">@color/background_chip_state_list</item>
         <item name="android:textColor">@color/text_color_chip_state_list</item>
     </style>
+
+    <style name="heading_description_picture_style">
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">@dimen/description_header_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">@dimen/description_header_margin_top</item>
+    </style>
+
+    <style name="body_description_picture_style">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">@dimen/description_body_size</item>
+    </style>
 </resources>

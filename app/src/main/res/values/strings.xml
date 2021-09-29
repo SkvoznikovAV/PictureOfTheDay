@@ -6,20 +6,19 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="img_title">title</string>
     <string name="img_explanation">explanation</string>
     <string name="msg_loading">loading...</string>
     <string name="msg_linkisempty">Link is empty</string>
     <string name="str_prefix_error">Ошибка:</string>
-    <string name="menu_1">действие 1</string>
-    <string name="menu_2">действие 2</string>
+    <string name="menu_1">Фото дня за другую дату</string>
+    <string name="menu_2">О программе</string>
     <string name="msg_like">Поставили лайк</string>
     <string name="settings_header">Настройки</string>
     <string name="txt_choice_theme">Тема приложения</string>
-    <string name="txt_earth_theme">Земная тема</string>
-    <string name="txt_moon_theme">Лунная тема</string>
-    <string name="txt_mars_theme">Марсианская тема</string>
+    <string name="txt_earth_theme">Земная</string>
+    <string name="txt_moon_theme">Лунная</string>
+    <string name="txt_mars_theme">Марсианская</string>
+    <string name="msg_in_develop">функционал в разработке</string>
 </resources>

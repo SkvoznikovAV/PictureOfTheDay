@@ -5,19 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import geekbarains.material.R
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
-
-    private val EARTH_THEME = "EARTH_THEME"
-    private val MOON_THEME = "MOON_THEME"
-    private val MARS_THEME = "MARS_THEME"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,10 +60,16 @@ class SettingsFragment : Fragment() {
 
         readTheme()
 
-        chipGroupThemes.setOnCheckedChangeListener { group, checkedId ->
+        chipGroupThemes.setOnCheckedChangeListener { _, checkedId ->
             chipGroupThemes.findViewById<Chip>(checkedId)?.let {
                 changeTheme(it.id)
             }
         }
+    }
+
+    companion object{
+        const val EARTH_THEME = "EARTH_THEME"
+        const val MOON_THEME = "MOON_THEME"
+        const val MARS_THEME = "MARS_THEME"
     }
 }
