@@ -21,4 +21,7 @@
     <string name="txt_moon_theme">Лунная</string>
     <string name="txt_mars_theme">Марсианская</string>
     <string name="msg_in_develop">функционал в разработке</string>
+    <string name="about_prg">О программе</string>
+    <string name="txt_about">Программа разработана в рамках курса Android. Material Design \n\nРазработчик: AndrewSkv</string>
+    <string name="refresh">Обновить</string>
 </resources>

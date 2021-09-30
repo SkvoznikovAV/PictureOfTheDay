@@ -29,7 +29,7 @@ class PictureOfTheDayViewModel(
         if (apiKey.isBlank()) {
             liveDataForViewToObserve.value = PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDayFromDate(apiKey,"2021-09-26").enqueue(object : Callback<PODServerResponseData> {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object : Callback<PODServerResponseData> {
                 override fun onResponse(
                     call: Call<PODServerResponseData>,
                     response: Response<PODServerResponseData>
