@@ -43,6 +43,10 @@ class PictureOfTheDayFragment : Fragment() {
             .commitNow()
     }
 
+    private fun loadAndRenderData(){
+        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,7 +54,7 @@ class PictureOfTheDayFragment : Fragment() {
         setBottomAppBar(view)
         setInputWiki()
 
-        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        loadAndRenderData()
     }
 
     private fun setInputWiki() {
@@ -71,11 +75,21 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> toast(getString(R.string.msg_like))
-            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+            R.id.app_bar_settings -> {
+                activity?.
+                supportFragmentManager?.
+                beginTransaction()?.
+                replace(R.id.container, SettingsFragment())?.
+                addToBackStack(null)?.
+                commit()
+            }
             android.R.id.home -> {
                 activity?.let {
                     PictureBottomMenuFragment().show(it.supportFragmentManager, "tag")
                 }
+            }
+            R.id.app_bar_refresh -> {
+                loadAndRenderData()
             }
         }
         return super.onOptionsItemSelected(item)
