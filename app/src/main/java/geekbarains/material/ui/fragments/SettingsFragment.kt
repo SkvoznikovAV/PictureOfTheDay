@@ -1,4 +1,4 @@
-package geekbarains.material.ui
+package geekbarains.material.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -20,7 +20,7 @@ class SettingsFragment : Fragment() {
 
     private fun changeTheme(idTheme : Int){
         activity?.let { reqActivity ->
-            val preferences = reqActivity.getPreferences(Context.MODE_PRIVATE)
+            val preferences = reqActivity.getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE)
             val editor = preferences.edit()
 
             when (idTheme){
@@ -49,9 +49,11 @@ class SettingsFragment : Fragment() {
 
     private fun readTheme() {
         activity?.let {
-            if (it.getPreferences(Context.MODE_PRIVATE).getBoolean(EARTH_THEME, false)) chipEarthTheme.isChecked = true
-            if (it.getPreferences(Context.MODE_PRIVATE).getBoolean(MOON_THEME, false)) chipMoonTheme.isChecked = true
-            if (it.getPreferences(Context.MODE_PRIVATE).getBoolean(MARS_THEME, false)) chipMarsTheme.isChecked = true
+            val pref=it.getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE)
+
+            if (pref.getBoolean(EARTH_THEME, false)) chipEarthTheme.isChecked = true
+            if (pref.getBoolean(MOON_THEME, false)) chipMoonTheme.isChecked = true
+            if (pref.getBoolean(MARS_THEME, false)) chipMarsTheme.isChecked = true
         }
     }
 
@@ -71,5 +73,6 @@ class SettingsFragment : Fragment() {
         const val EARTH_THEME = "EARTH_THEME"
         const val MOON_THEME = "MOON_THEME"
         const val MARS_THEME = "MARS_THEME"
+        const val MY_SETTINGS = "MyPref"
     }
 }

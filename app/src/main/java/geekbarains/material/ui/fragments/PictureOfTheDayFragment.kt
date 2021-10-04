@@ -1,4 +1,4 @@
-package geekbarains.material.ui
+package geekbarains.material.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.databinding.PictureOfTheDayFragmentBinding
+import geekbarains.material.ui.activities.MainActivity
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
@@ -65,6 +66,11 @@ class PictureOfTheDayFragment : Fragment() {
                 })
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

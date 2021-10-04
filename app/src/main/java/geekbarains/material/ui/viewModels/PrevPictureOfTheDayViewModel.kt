@@ -11,24 +11,30 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PictureOfTheDayViewModel(
+class PrevPictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
 ) : ViewModel() {
 
-    fun getData(): LiveData<PictureOfTheDayData> {
-        sendServerRequest()
+    fun getData(date : String): LiveData<PictureOfTheDayData> {
+        sendServerRequest(mapDate(date))
         return liveDataForViewToObserve
     }
 
-    private fun sendServerRequest() {
+    private fun mapDate(date : String) : String {
+        val str = date.split(".").toTypedArray()
+        return "${str[2]}-${str[1]}-${str[0]}"
+    }
+
+    private fun sendServerRequest(date : String) {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
 
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             liveDataForViewToObserve.value = PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(object : Callback<PODServerResponseData> {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDayFromDate(apiKey,date).enqueue(object :
+                Callback<PODServerResponseData> {
                 override fun onResponse(
                     call: Call<PODServerResponseData>,
                     response: Response<PODServerResponseData>

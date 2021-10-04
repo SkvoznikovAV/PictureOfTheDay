@@ -1,12 +1,14 @@
-package geekbarains.material.ui
+package geekbarains.material.ui.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import geekbarains.material.R
+import geekbarains.material.ui.activities.PreviousPictureOfTheDayActivity
 import kotlinx.android.synthetic.main.bottom_navigation_layout.*
 
 class PictureBottomMenuFragment : BottomSheetDialogFragment() {
@@ -28,12 +30,19 @@ class PictureBottomMenuFragment : BottomSheetDialogFragment() {
         commit()
     }
 
+    private fun openPreviousPictureOfTheDayActivity(){
+        activity?.let {
+            val intent = Intent(it, PreviousPictureOfTheDayActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         navigation_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.previousPictureOfTheDay -> Toast.makeText(context, getString(R.string.msg_in_develop), Toast.LENGTH_SHORT).show()
+                R.id.previousPictureOfTheDay -> openPreviousPictureOfTheDayActivity()
                 R.id.about -> openAboutFragment()
             }
             this.dismiss()
