@@ -21,6 +21,11 @@ class PrevPictureOfTheDayViewModel(
         return liveDataForViewToObserve
     }
 
+    /**
+     * Преобразует строку даты [date] из формата DD.MM.YYYY в формат YYYY-MM-DD
+     * @return Строка даты в формате YYYY-MM-DD
+     */
+
     private fun mapDate(date : String) : String {
         val str = date.split(".").toTypedArray()
         return "${str[2]}-${str[1]}-${str[0]}"

@@ -5,7 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import geekbarains.material.R
 import geekbarains.material.ui.fragments.SettingsFragment
 
+/**
+ * Базовое активити от которого наследуются все активити в приложении
+ *
+ */
+
 open class BaseActivity : AppCompatActivity() {
+
+    /**
+     * Считывает сохраненную тему из настроек и устанавливает ее для активити
+     */
     protected fun setTheme() {
         val pref=getSharedPreferences(SettingsFragment.MY_SETTINGS, Context.MODE_PRIVATE)
 

@@ -1,5 +1,6 @@
 package geekbarains.material.ui.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.widget.AppCompatTextView
@@ -10,9 +11,18 @@ import kotlinx.android.synthetic.main.prev_date_tab_layout.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Активити для вывода фотографий за предыдущие дни
+ *
+ */
+
 class PreviousPictureOfTheDayActivity : BaseActivity() {
     private lateinit var arrPrevDates : Array<String>
 
+    /**
+     * Инициализация массива предыдущих дат
+     */
+    @SuppressLint("SimpleDateFormat")
     private fun initDates() {
         val sdf = SimpleDateFormat("dd.M.yyyy")
 
@@ -42,6 +52,11 @@ class PreviousPictureOfTheDayActivity : BaseActivity() {
         setAllTabs()
     }
 
+
+    /**
+     * Функция заполнения заголовков закладок
+     */
+    @SuppressLint("InflateParams")
     private fun setAllTabs() {
         val layoutInflater = LayoutInflater.from(this@PreviousPictureOfTheDayActivity)
 
