@@ -5,8 +5,8 @@
     <color name="colorAccent">#D81B60</color>
 
     //Earth theme colors
-    <color name="colorPrimaryEarth">#2a9cc9 </color>
-    <color name="colorPrimaryEarthDark">#00574B</color>
+    <color name="colorPrimaryEarth">#2a9cc9</color>
+    <color name="colorPrimaryEarthDark">#2a9cc9</color>
     <color name="colorAccentEarth">#D81B60</color>
     <color name="colorBackgroundBottomSheetEarth">#f2f2f2</color>
     <color name="colorWindowBackgroundEarth">#ccfccf</color>
@@ -17,7 +17,7 @@
 
     //Mars theme colors
     <color name="colorPrimaryMars">#6b070b</color>
-    <color name="colorPrimaryMarsDark">#00574B</color>
+    <color name="colorPrimaryMarsDark">#6b070b</color>
     <color name="colorAccentMars">#D81B60</color>
     <color name="colorBackgroundBottomSheetMars">#ffffc7</color>
     <color name="colorWindowBackgroundMars">#fd9a88</color>
@@ -28,7 +28,7 @@
 
     //Moon theme colors
     <color name="colorPrimaryMoon">#004099</color>
-    <color name="colorPrimaryMoonDark">#00574B</color>
+    <color name="colorPrimaryMoonDark">#004099</color>
     <color name="colorAccentMoon">#D81B60</color>
     <color name="colorBackgroundBottomSheetMoon">#d9e8ff</color>
     <color name="colorWindowBackgroundMoon">#e6e6e6</color>

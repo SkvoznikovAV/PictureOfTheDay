@@ -6,9 +6,10 @@ import geekbarains.material.ui.fragments.PictureOfTheDayFragment
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        setTheme()
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

@@ -40,18 +40,17 @@ class PreviousPictureOfTheDayActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_previous_picture_of_the_day)
 
-        setTheme()
         initDates()
-
         prevDateViewPager.adapter = PrevPictureOfTheDayViewPagerAdapter(supportFragmentManager,
             arrPrevDates)
         prevDateTabLayout.setupWithViewPager(prevDateViewPager)
         setAllTabs()
     }
-
 
     /**
      * Функция заполнения заголовков закладок
