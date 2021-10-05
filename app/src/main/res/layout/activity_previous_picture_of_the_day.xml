@@ -19,6 +19,7 @@
             android:id="@+id/prevDateTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?backgroundBottomSheet"
             app:tabGravity="fill" />
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

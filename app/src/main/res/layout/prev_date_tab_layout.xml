@@ -13,8 +13,8 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         tools:text="01.01.2021"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/header_date_tab_layout_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
