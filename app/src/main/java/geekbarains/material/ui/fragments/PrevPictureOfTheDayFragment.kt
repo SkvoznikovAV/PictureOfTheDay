@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -16,7 +15,6 @@ import geekbarains.material.ui.viewModels.PrevPictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.image_view
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
-import kotlinx.android.synthetic.main.picture_of_the_day_fragment.*
 
 class PrevPictureOfTheDayFragment : Fragment() {
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
@@ -31,7 +29,7 @@ class PrevPictureOfTheDayFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPrevPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,7 +44,7 @@ class PrevPictureOfTheDayFragment : Fragment() {
     }
 
     private fun loadAndRenderData(){
-        viewModel.getData(repDate).observe(this@PrevPictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        viewModel.getData(repDate).observe(this@PrevPictureOfTheDayFragment, { renderData(it) })
     }
 
     override fun onDestroyView() {

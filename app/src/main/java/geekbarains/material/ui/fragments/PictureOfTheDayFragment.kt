@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.databinding.PictureOfTheDayFragmentBinding
+import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
 import geekbarains.material.ui.activities.MainActivity
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
+import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
-import kotlinx.android.synthetic.main.picture_of_the_day_fragment.*
 
 class PictureOfTheDayFragment : Fragment() {
-    private var _binding: PictureOfTheDayFragmentBinding? = null
+    private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
@@ -31,7 +31,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PictureOfTheDayFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
 
