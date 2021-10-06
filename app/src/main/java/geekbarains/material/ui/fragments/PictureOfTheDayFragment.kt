@@ -36,12 +36,12 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun setPictureDescriptionBottomSheet(view : View) {
-        pictureDescriptionBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.pictureOfTheDayDescriptionContainer))
-        pictureDescriptionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
         childFragmentManager.beginTransaction()
             .replace(R.id.pictureOfTheDayDescriptionContainer, PictureDescriptionFragment())
             .commitNow()
+
+        pictureDescriptionBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.pictureOfTheDayDescriptionContainer))
+        pictureDescriptionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun loadAndRenderData(){
