@@ -11,12 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
 import geekbarains.material.ui.activities.MainActivity
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
+import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
@@ -80,7 +80,10 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast(getString(R.string.msg_like))
+            R.id.app_bar_like -> {
+                pictureMotionLayout.setTransition(R.id.starting_like,R.id.ending_like)
+                pictureMotionLayout.transitionToEnd()
+            }
             R.id.app_bar_settings -> {
                 activity?.
                 supportFragmentManager?.
@@ -121,6 +124,12 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                     bottom_sheet_description_header.text = serverResponseData.title
                     bottom_sheet_description.text = serverResponseData.explanation
+
+                    wikiButton.setOnClickListener {
+                        pictureMotionLayout.setTransition(R.id.starting_wiki,R.id.ending_wiki)
+                        pictureMotionLayout.transitionToEnd()
+                    }
+
                 }
             }
             is PictureOfTheDayData.Loading -> {
