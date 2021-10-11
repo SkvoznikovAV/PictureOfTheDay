@@ -7,7 +7,6 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
@@ -53,7 +52,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun loadAndRenderData(){
-        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        viewModel.getData().observe(this@PictureOfTheDayFragment, { renderData(it) })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
