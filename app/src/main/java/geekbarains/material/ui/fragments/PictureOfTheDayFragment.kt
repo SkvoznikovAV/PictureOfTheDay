@@ -158,7 +158,6 @@ class PictureOfTheDayFragment : Fragment() {
                     }
 
                     setPictureClickListener()
-
                 }
             }
             is PictureOfTheDayData.Loading -> {

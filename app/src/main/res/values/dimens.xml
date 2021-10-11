@@ -10,4 +10,5 @@
     <dimen name="txt_about_margin_top">10dp</dimen>
     <dimen name="body_about_program_size">17sp</dimen>
     <dimen name="header_date_tab_layout_size">18sp</dimen>
+    <dimen name="margin_button_send_develop">10dp</dimen>
 </resources>

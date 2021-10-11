@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/about_container"
     android:layout_width="match_parent"
     android:background="?backgroundWindow"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/about_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_prg"
@@ -17,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/about_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/txt_about_margin_top"
@@ -25,5 +27,36 @@
         android:textColor="@color/color_black"
         android:text="@string/txt_about"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/about_header" />
+
+    <Button
+        android:id="@+id/btn_write_dev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/write_to_develop"
+        android:layout_margin="@dimen/margin_button_send_develop"
+        app:layout_constraintTop_toBottomOf="@+id/about_body"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/msg_dev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_message_to_developer"
+        android:layout_margin="@dimen/margin_button_send_develop"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/btn_write_dev"
+        />
+    <Button
+        android:id="@+id/btn_send_develop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_send_message_to_developer_text"
+        android:visibility="gone"
+        android:layout_margin="@dimen/margin_button_send_develop"
+        app:layout_constraintTop_toBottomOf="@id/msg_dev"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
