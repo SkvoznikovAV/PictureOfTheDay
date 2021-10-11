@@ -6,4 +6,8 @@
     <dimen name="description_body_size">15sp</dimen>
     <dimen name="description_header_margin_top">5dp</dimen>
     <dimen name="settings_header_theme_size">18sp</dimen>
+    <dimen name="header_about_program_size">24sp</dimen>
+    <dimen name="txt_about_margin_top">10dp</dimen>
+    <dimen name="body_about_program_size">17sp</dimen>
+    <dimen name="header_date_tab_layout_size">18sp</dimen>
 </resources>

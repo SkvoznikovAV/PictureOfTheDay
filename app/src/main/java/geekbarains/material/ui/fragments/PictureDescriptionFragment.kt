@@ -1,4 +1,4 @@
-package geekbarains.material.ui
+package geekbarains.material.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

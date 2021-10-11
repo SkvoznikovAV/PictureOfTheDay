@@ -1,4 +1,4 @@
-package geekbarains.material.ui
+package geekbarains.material.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.databinding.PictureOfTheDayFragmentBinding
+import geekbarains.material.ui.activities.MainActivity
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
@@ -43,6 +44,10 @@ class PictureOfTheDayFragment : Fragment() {
             .commitNow()
     }
 
+    private fun loadAndRenderData(){
+        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,7 +55,7 @@ class PictureOfTheDayFragment : Fragment() {
         setBottomAppBar(view)
         setInputWiki()
 
-        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        loadAndRenderData()
     }
 
     private fun setInputWiki() {
@@ -63,6 +68,11 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
@@ -71,11 +81,21 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> toast(getString(R.string.msg_like))
-            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+            R.id.app_bar_settings -> {
+                activity?.
+                supportFragmentManager?.
+                beginTransaction()?.
+                replace(R.id.container, SettingsFragment())?.
+                addToBackStack(null)?.
+                commit()
+            }
             android.R.id.home -> {
                 activity?.let {
                     PictureBottomMenuFragment().show(it.supportFragmentManager, "tag")
                 }
+            }
+            R.id.app_bar_refresh -> {
+                loadAndRenderData()
             }
         }
         return super.onOptionsItemSelected(item)
