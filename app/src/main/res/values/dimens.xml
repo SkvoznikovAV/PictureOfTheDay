@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="txt_error_size">34sp</dimen>
+    <dimen name="settings_header_size">30sp</dimen>
+    <dimen name="description_header_size">20sp</dimen>
+    <dimen name="description_body_size">15sp</dimen>
+    <dimen name="description_header_margin_top">5dp</dimen>
+    <dimen name="settings_header_theme_size">18sp</dimen>
 </resources>

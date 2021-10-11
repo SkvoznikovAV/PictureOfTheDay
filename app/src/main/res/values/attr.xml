@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="backgroundBottomSheet" format="reference"/>
+    <attr name="backgroundChipsOn" format="reference"/>
+    <attr name="backgroundChipsOff" format="reference"/>
+    <attr name="colorTextChipsOn" format="reference"/>
+    <attr name="colorTextChipsOff" format="reference"/>
+    <attr name="backgroundWindow" format="reference"/>
+</resources>
