@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
@@ -21,6 +26,8 @@ class PrevPictureOfTheDayFragment : Fragment() {
     private val viewModel: PrevPictureOfTheDayViewModel by lazy {
         ViewModelProviders.of(this).get(PrevPictureOfTheDayViewModel::class.java)
     }
+
+    private var isExpandedPicture = false
 
     private lateinit var repDate : String
     private var _binding: FragmentPrevPictureOfTheDayBinding? = null
@@ -61,6 +68,25 @@ class PrevPictureOfTheDayFragment : Fragment() {
         loadAndRenderData()
     }
 
+    private fun setPictureClickListener(){
+        with (binding) {
+            image_view.setOnClickListener {
+                isExpandedPicture = !isExpandedPicture
+
+                TransitionManager.beginDelayedTransition(
+                    imageViewContainer, TransitionSet()
+                        .addTransition(ChangeBounds())
+                        .addTransition(ChangeImageTransform())
+                )
+
+                val params: ViewGroup.LayoutParams = imageView.layoutParams
+                params.height = if (isExpandedPicture) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+                imageView.layoutParams = params
+                imageView.scaleType = if (isExpandedPicture) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+            }
+        }
+    }
+
     private fun renderData(data: PictureOfTheDayData) = with (binding) {
         when (data) {
             is PictureOfTheDayData.Success -> {
@@ -81,6 +107,8 @@ class PrevPictureOfTheDayFragment : Fragment() {
                     }
                     bottom_sheet_description_header.text = serverResponseData.title
                     bottom_sheet_description.text = serverResponseData.explanation
+
+                    setPictureClickListener()
                 }
             }
             is PictureOfTheDayData.Loading -> {

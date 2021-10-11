@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
+            android:id="@+id/imageViewContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
@@ -22,14 +23,15 @@
             <geekbarains.material.util.EquilateralImageView
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/photo_of_the_day_stub"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_no_photo_vector" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_no_photo_vector"
+                tools:layout_editor_absoluteX="10dp" />
+        </FrameLayout>
     </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
