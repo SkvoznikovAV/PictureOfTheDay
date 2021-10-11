@@ -28,7 +28,6 @@ class PrevPictureOfTheDayFragment : Fragment() {
     }
 
     private var isExpandedPicture = false
-
     private lateinit var repDate : String
     private var _binding: FragmentPrevPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
