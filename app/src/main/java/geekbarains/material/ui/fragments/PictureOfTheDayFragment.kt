@@ -21,7 +21,6 @@ import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
 import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
-import kotlinx.android.synthetic.main.fragment_picture_of_the_day.image_view
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 
 class PictureOfTheDayFragment : Fragment() {
@@ -113,7 +112,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun setPictureClickListener(){
         with (binding) {
-            image_view.setOnClickListener {
+            imageView.setOnClickListener {
                 isExpandedPicture = !isExpandedPicture
 
                 TransitionManager.beginDelayedTransition(
@@ -143,7 +142,7 @@ class PictureOfTheDayFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast(getString(R.string.msg_linkisempty))
                 } else {
-                    image_view.load(url) {
+                    imageView.load(url) {
                         lifecycle(this@PictureOfTheDayFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
