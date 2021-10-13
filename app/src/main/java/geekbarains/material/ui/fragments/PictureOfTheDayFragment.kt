@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.databinding.PictureOfTheDayFragmentBinding
 import geekbarains.material.ui.activities.MainActivity
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
+import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
-import kotlinx.android.synthetic.main.picture_of_the_day_fragment.*
+import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
 
 class PictureOfTheDayFragment : Fragment() {
-    private var _binding: PictureOfTheDayFragmentBinding? = null
+    private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
@@ -31,17 +31,17 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PictureOfTheDayFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     private fun setPictureDescriptionBottomSheet(view : View) {
-        pictureDescriptionBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.pictureOfTheDayDescriptionContainer))
-        pictureDescriptionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
         childFragmentManager.beginTransaction()
             .replace(R.id.pictureOfTheDayDescriptionContainer, PictureDescriptionFragment())
             .commitNow()
+
+        pictureDescriptionBottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.pictureOfTheDayDescriptionContainer))
+        pictureDescriptionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun loadAndRenderData(){
@@ -80,7 +80,10 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast(getString(R.string.msg_like))
+            R.id.app_bar_like -> {
+                pictureMotionLayout.setTransition(R.id.starting_like,R.id.ending_like)
+                pictureMotionLayout.transitionToEnd()
+            }
             R.id.app_bar_settings -> {
                 activity?.
                 supportFragmentManager?.
@@ -121,6 +124,12 @@ class PictureOfTheDayFragment : Fragment() {
                     }
                     bottom_sheet_description_header.text = serverResponseData.title
                     bottom_sheet_description.text = serverResponseData.explanation
+
+                    wikiButton.setOnClickListener {
+                        pictureMotionLayout.setTransition(R.id.starting_wiki,R.id.ending_wiki)
+                        pictureMotionLayout.transitionToEnd()
+                    }
+
                 }
             }
             is PictureOfTheDayData.Loading -> {

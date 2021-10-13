@@ -40,6 +40,7 @@
     //common colors
     <color name="color_gray">#66000000</color>
     <color name="color_black">#000000</color>
+    <color name="color_white">#ffffff</color>
     <color name="color_sheet_line">#663b4351</color>
 
 </resources>

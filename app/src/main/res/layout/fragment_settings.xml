@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?backgroundWindow"
@@ -12,22 +13,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="@string/settings_header"
         android:textColor="@color/color_black"
         android:textSize="@dimen/settings_header_size"
-        android:text="@string/settings_header" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/theme_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textColor="@color/color_black"
         android:text="@string/txt_choice_theme"
-        android:textSize="@dimen/settings_header_theme_size" />
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/settings_header_theme_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_header"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupThemes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:singleSelection="true">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme_app"
+        app:singleSelection="true"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipEarthTheme"
@@ -50,4 +62,4 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_mars_theme" />
     </com.google.android.material.chip.ChipGroup>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
