@@ -27,4 +27,12 @@
     <string name="write_to_develop">Написать разработчику</string>
     <string name="hint_message_to_developer">Сообщение</string>
     <string name="btn_send_message_to_developer_text">Отправить</string>
+    <string name="menu_3">Мои заметки</string>
+    <string name="notes_header">Мои заметки</string>
+    <string name="note_title">Заметка</string>
+    <string name="note_date">01.01.01</string>
+    <string name="btn_note_ok">OK</string>
+    <string name="txt_btn_note_ok">OK</string>
+    <string name="hint_txt_note">Текст заметки</string>
+    <string name="btn_note_cancel">Отмена</string>
 </resources>
