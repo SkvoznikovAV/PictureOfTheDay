@@ -19,7 +19,7 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     }
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
-        holder.bind(notes[position], onItemClickListener, position)
+        holder.bind(notes[position], onItemClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -29,17 +29,17 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     class NotesHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ItemNoteBinding.bind(item)
 
-        fun bind(note: Note, onItemClickListener: OnItemClickListener?, position: Int) = with (binding){
+        fun bind(note: Note, onItemClickListener: OnItemClickListener?) = with (binding){
             noteTitle.text = note.title;
             noteDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(note.date)
 
             delNote.setOnClickListener{
-                onItemClickListener?.onItemRemoved(position)
+                onItemClickListener?.onItemRemoved(layoutPosition)
             }
 
             onItemClickListener?.let{
                 itemView.setOnClickListener{
-                    onItemClickListener.onItemClick(note, position)
+                    onItemClickListener.onItemClick(note, layoutPosition)
                 }
             }
         }
@@ -58,7 +58,7 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     fun delNote(position: Int){
         notes.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, getItemCount());
+        //notifyItemRangeChanged(position, getItemCount());
     }
 
     interface OnItemClickListener{
