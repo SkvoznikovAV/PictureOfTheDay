@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import geekbarains.material.R
 import kotlinx.android.synthetic.main.dialog_note.*
 
-class NoteDialogFragment(private var btnClickListener : onClickListener) : DialogFragment() {
+class NoteDialogFragment(private var btnClickListener : OnClickListener) : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_note, container, false)
         isCancelable = false
@@ -28,6 +28,10 @@ class NoteDialogFragment(private var btnClickListener : onClickListener) : Dialo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let{
+            note_edit.setText(it.getString(TXT_NOTE))
+        }
+
         btn_note_ok.setOnClickListener {
             btnClickListener.onButtonOkClick(note_edit.text.toString())
             dismiss()
@@ -38,7 +42,21 @@ class NoteDialogFragment(private var btnClickListener : onClickListener) : Dialo
         }
     }
 
-    interface onClickListener{
+    interface OnClickListener{
         fun onButtonOkClick(txt: String)
+    }
+
+    companion object{
+        private const val TXT_NOTE="TXT_NOTE"
+
+        fun newInstance(btnClickListener : OnClickListener, txt: String = ""): NoteDialogFragment{
+            val args = Bundle()
+            args.putString(TXT_NOTE,txt)
+
+            val instance=NoteDialogFragment(btnClickListener)
+            instance.arguments=args
+
+            return instance
+        }
     }
 }

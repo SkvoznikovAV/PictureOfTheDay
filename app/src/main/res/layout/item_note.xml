@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/noteTitle"
         android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.88"
         android:layout_height="wrap_content"
         android:textColor="@color/color_black"
         android:textSize="@dimen/note_title_size"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/note_title" />
@@ -22,18 +22,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_black"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/note_date_text_size"
+        app:layout_constraintWidth_percent="0.88"
         app:layout_constraintTop_toBottomOf="@+id/noteTitle"
+        app:layout_constraintEnd_toStartOf="@id/barrier"
         tools:text="@string/note_date" />
 
     <View
+        android:id="@+id/delim"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/color_gray"
+        android:background="@color/color_black"
         app:layout_constraintTop_toBottomOf="@+id/noteDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/noteDate"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/noteDate"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="noteTitle,noteDate" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/del_note"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_max="@dimen/max_height_icon_delete"
+        android:tint="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/noteTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
