@@ -1,10 +1,12 @@
 package geekbarains.material.notes.activities
 
 import android.os.Bundle
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.databinding.ActivityNotesBinding
 import geekbarains.material.notes.adapters.NotesAdapter
 import geekbarains.material.notes.entities.Note
+import geekbarains.material.notes.ui.ItemTouchHelperCallback
 import geekbarains.material.notes.ui.NoteDialogFragment
 import geekbarains.material.ui.activities.BaseActivity
 import java.util.*
@@ -26,6 +28,9 @@ class NotesActivity: BaseActivity() {
     private fun init() = with (binding) {
         notesRecycleView.layoutManager = LinearLayoutManager(this@NotesActivity)
         notesRecycleView.adapter = adapter
+
+        ItemTouchHelper(ItemTouchHelperCallback(adapter))
+            .attachToRecyclerView(notesRecycleView)
 
         adapter.addNote(Note("Заметка 1", Date()))
         adapter.addNote(Note("Заметка 2", Date()))

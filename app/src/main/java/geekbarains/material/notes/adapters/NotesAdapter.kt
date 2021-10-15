@@ -1,5 +1,6 @@
 package geekbarains.material.notes.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import geekbarains.material.databinding.ItemNoteBinding
 import geekbarains.material.notes.entities.Note
 import java.text.SimpleDateFormat
 
-class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
+class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>(), ItemTouchHelperAdapter {
     private val notes = ArrayList<Note>()
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -26,7 +27,7 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
         return notes.size
     }
 
-    inner class NotesHolder(item: View): RecyclerView.ViewHolder(item){
+    inner class NotesHolder(item: View): RecyclerView.ViewHolder(item), ItemTouchHelperViewHolder{
         val binding = ItemNoteBinding.bind(item)
 
         private fun moveUp() {
@@ -64,6 +65,16 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
                 }
             }
         }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.GRAY)
+
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+
+        }
     }
 
     fun changeNote(txt: String, position: Int){
@@ -86,7 +97,27 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
         fun onItemRemoved(position: Int)
     }
 
+
+    interface ItemTouchHelperViewHolder {
+        fun onItemSelected()
+        fun onItemClear()
+    }
+
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
         this.onItemClickListener = onItemClickListener
     }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        notes.removeAt(fromPosition).apply {
+            notes.add(if (toPosition > fromPosition) toPosition - 1 else toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+
+    }
+
+    override fun onItemDismiss(position: Int) {
+        notes.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }
+
