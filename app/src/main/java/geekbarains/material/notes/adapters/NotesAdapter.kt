@@ -67,7 +67,7 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>(), ItemTouchH
         }
 
         override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.GRAY)
+            itemView.setBackgroundColor(Color.WHITE)
 
         }
 
