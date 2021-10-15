@@ -26,19 +26,40 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
         return notes.size
     }
 
-    class NotesHolder(item: View): RecyclerView.ViewHolder(item){
+    inner class NotesHolder(item: View): RecyclerView.ViewHolder(item){
         val binding = ItemNoteBinding.bind(item)
 
-        fun bind(note: Note, onItemClickListener: OnItemClickListener?) = with (binding){
+        private fun moveUp() {
+            layoutPosition.takeIf { it > 0 }?.also { currentPosition ->
+                notes.removeAt(currentPosition).apply {
+                    notes.add(currentPosition - 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition - 1)
+            }
+        }
+
+        private fun moveDown() {
+            layoutPosition.takeIf { it < notes.size - 1 }?.also { currentPosition ->
+                notes.removeAt(currentPosition).apply {
+                    notes.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
+            }
+        }
+
+        fun bind(note: Note, onItemClickListener: OnItemClickListener?) = with(binding) {
             noteTitle.text = note.title;
             noteDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(note.date)
 
-            delNote.setOnClickListener{
+            moveItemDown.setOnClickListener { moveDown() }
+            moveItemUp.setOnClickListener { moveUp() }
+
+            delNote.setOnClickListener {
                 onItemClickListener?.onItemRemoved(layoutPosition)
             }
 
-            onItemClickListener?.let{
-                itemView.setOnClickListener{
+            onItemClickListener?.let {
+                itemView.setOnClickListener {
                     onItemClickListener.onItemClick(note, layoutPosition)
                 }
             }
@@ -58,7 +79,6 @@ class NotesAdapter: RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     fun delNote(position: Int){
         notes.removeAt(position)
         notifyItemRemoved(position)
-        //notifyItemRangeChanged(position, getItemCount());
     }
 
     interface OnItemClickListener{
