@@ -21,13 +21,12 @@ import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.image_view
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
 
-class PrevPictureOfTheDayFragment : Fragment() {
+class PrevPictureOfTheDayFragment : PictureOfTheDayBaseFragment() {
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
     private val viewModel: PrevPictureOfTheDayViewModel by lazy {
         ViewModelProviders.of(this).get(PrevPictureOfTheDayViewModel::class.java)
     }
 
-    private var isExpandedPicture = false
     private lateinit var repDate : String
     private var _binding: FragmentPrevPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
@@ -67,22 +66,9 @@ class PrevPictureOfTheDayFragment : Fragment() {
         loadAndRenderData()
     }
 
-    private fun setPictureClickListener(){
-        with (binding) {
-            image_view.setOnClickListener {
-                isExpandedPicture = !isExpandedPicture
-
-                TransitionManager.beginDelayedTransition(
-                    imageViewContainer, TransitionSet()
-                        .addTransition(ChangeBounds())
-                        .addTransition(ChangeImageTransform())
-                )
-
-                val params: ViewGroup.LayoutParams = imageView.layoutParams
-                params.height = if (isExpandedPicture) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
-                imageView.layoutParams = params
-                imageView.scaleType = if (isExpandedPicture) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
-            }
+    private fun setPictureClickListener() = with(binding) {
+        image_view.setOnClickListener {
+            changePictureSize(imageViewContainer, imageView)
         }
     }
 

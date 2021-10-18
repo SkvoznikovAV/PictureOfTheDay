@@ -23,10 +23,9 @@ import kotlinx.android.synthetic.main.picture_of_the_day_description.*
 import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 
-class PictureOfTheDayFragment : Fragment() {
+class PictureOfTheDayFragment : PictureOfTheDayBaseFragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
-    private var isExpandedPicture = false
 
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -110,22 +109,9 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setPictureClickListener(){
-        with (binding) {
-            imageView.setOnClickListener {
-                isExpandedPicture = !isExpandedPicture
-
-                TransitionManager.beginDelayedTransition(
-                    pictureMotionLayout, TransitionSet()
-                        .addTransition(ChangeBounds())
-                        .addTransition(ChangeImageTransform())
-                )
-
-                val params: ViewGroup.LayoutParams = imageView.layoutParams
-                params.height = if (isExpandedPicture) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
-                imageView.layoutParams = params
-                imageView.scaleType = if (isExpandedPicture) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
-            }
+    private fun setPictureClickListener() = with(binding){
+        imageView.setOnClickListener {
+            changePictureSize(pictureMotionLayout, imageView)
         }
     }
 
