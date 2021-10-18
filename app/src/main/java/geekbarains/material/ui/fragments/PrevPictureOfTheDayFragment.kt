@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
@@ -17,6 +19,7 @@ import geekbarains.material.R
 import geekbarains.material.databinding.FragmentPrevPictureOfTheDayBinding
 import geekbarains.material.ui.entities.PictureOfTheDayData
 import geekbarains.material.ui.viewModels.PrevPictureOfTheDayViewModel
+import geekbarains.material.util.EquilateralImageView
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.image_view
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
@@ -49,7 +52,7 @@ class PrevPictureOfTheDayFragment : PictureOfTheDayBaseFragment() {
     }
 
     private fun loadAndRenderData(){
-        viewModel.getData(repDate).observe(this@PrevPictureOfTheDayFragment, { renderData(it) })
+        viewModel.getData(repDate).observe(this@PrevPictureOfTheDayFragment, { renderDataLoc(it) })
     }
 
     override fun onDestroyView() {
@@ -66,51 +69,17 @@ class PrevPictureOfTheDayFragment : PictureOfTheDayBaseFragment() {
         loadAndRenderData()
     }
 
-    private fun setPictureClickListener() = with(binding) {
-        image_view.setOnClickListener {
-            changePictureSize(imageViewContainer, imageView)
-        }
-    }
-
-    private fun renderData(data: PictureOfTheDayData) = with (binding) {
-        when (data) {
-            is PictureOfTheDayData.Success -> {
-                pictureOfTheDayLoadingLayout.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.GONE
-                pictureOfTheDayLayout.visibility = View.VISIBLE
-                pictureOfTheDayDescriptionContainer.visibility = View.VISIBLE
-
-                val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
-                if (url.isNullOrEmpty()) {
-
-                } else {
-                    image_view.load(url) {
-                        lifecycle(this@PrevPictureOfTheDayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-                    }
-                    bottom_sheet_description_header.text = serverResponseData.title
-                    bottom_sheet_description.text = serverResponseData.explanation
-
-                    setPictureClickListener()
-                }
-            }
-            is PictureOfTheDayData.Loading -> {
-                pictureOfTheDayLayout.visibility = View.GONE
-                pictureOfTheDayDescriptionContainer.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.GONE
-                pictureOfTheDayLoadingLayout.visibility = View.VISIBLE
-            }
-            is PictureOfTheDayData.Error -> {
-                pictureOfTheDayLayout.visibility = View.GONE
-                pictureOfTheDayDescriptionContainer.visibility = View.GONE
-                pictureOfTheDayLoadingLayout.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.VISIBLE
-
-                txtError.text=String.format("%s %s",getString(R.string.str_prefix_error),data.error.message)
-            }
-        }
+    private fun renderDataLoc(data: PictureOfTheDayData) = with (binding) {
+        renderData(data,
+            pictureOfTheDayLoadingLayout,
+            pictureOfTheDayErrorLayout,
+            pictureOfTheDayLayout,
+            pictureOfTheDayDescriptionContainer,
+            imageView,
+            imageViewContainer,
+            this@PrevPictureOfTheDayFragment,
+            txtError
+        )
     }
 
     companion object {

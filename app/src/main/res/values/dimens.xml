@@ -16,4 +16,5 @@
     <dimen name="dialog_note_btn_margin">10dp</dimen>
     <dimen name="note_date_text_size">13sp</dimen>
     <dimen name="max_height_icon_delete">34dp</dimen>
+    <dimen name="body_description_padding">10dp</dimen>
 </resources>
