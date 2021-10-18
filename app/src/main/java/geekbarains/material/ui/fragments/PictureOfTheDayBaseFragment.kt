@@ -48,19 +48,14 @@ open class PictureOfTheDayBaseFragment: Fragment() {
         val prefExplanation="Explanation:"
         val prefCopyRight="Image Credit & Copyright:"
         val descriptionText = SpannableString("$prefExplanation $explanation\n$prefCopyRight $copyRightLoc")
-        descriptionText.setSpan(StyleSpan(Typeface.BOLD),0,prefExplanation.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        descriptionText.setSpan(ForegroundColorSpan(Color.BLUE),0,prefExplanation.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
         descriptionText.setSpan(StyleSpan(Typeface.BOLD),0,prefExplanation.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         descriptionText.setSpan(ForegroundColorSpan(Color.BLUE),0,prefExplanation.length-1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        descriptionText.setSpan(StyleSpan(Typeface.BOLD),
-            prefExplanation.length+explanation.length+2,
-            prefExplanation.length+explanation.length+prefCopyRight.length+2,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        descriptionText.setSpan(ForegroundColorSpan(Color.BLUE),
-            prefExplanation.length+explanation.length+2,
-            prefExplanation.length+explanation.length+prefCopyRight.length+2,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        descriptionText.setSpan(StyleSpan(Typeface.BOLD),prefExplanation.length+explanation.length+2,
+            prefExplanation.length+explanation.length+prefCopyRight.length+2,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        descriptionText.setSpan(ForegroundColorSpan(Color.BLUE),prefExplanation.length+explanation.length+2,
+            prefExplanation.length+explanation.length+prefCopyRight.length+2,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         return descriptionText
     }
