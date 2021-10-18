@@ -24,4 +24,7 @@
     <string name="about_prg">О программе</string>
     <string name="txt_about">Программа разработана в рамках курса Android. Material Design \n\nРазработчик: AndrewSkv</string>
     <string name="refresh">Обновить</string>
+    <string name="write_to_develop">Написать разработчику</string>
+    <string name="hint_message_to_developer">Сообщение</string>
+    <string name="btn_send_message_to_developer_text">Отправить</string>
 </resources>

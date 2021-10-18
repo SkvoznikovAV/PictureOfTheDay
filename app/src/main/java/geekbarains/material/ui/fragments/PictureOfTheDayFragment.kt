@@ -4,10 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
@@ -17,10 +21,12 @@ import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
 import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
+import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
+    private var isExpandedPicture = false
 
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -45,7 +51,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun loadAndRenderData(){
-        viewModel.getData().observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+        viewModel.getData().observe(this@PictureOfTheDayFragment, { renderData(it) })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,6 +110,25 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setPictureClickListener(){
+        with (binding) {
+            imageView.setOnClickListener {
+                isExpandedPicture = !isExpandedPicture
+
+                TransitionManager.beginDelayedTransition(
+                    pictureMotionLayout, TransitionSet()
+                        .addTransition(ChangeBounds())
+                        .addTransition(ChangeImageTransform())
+                )
+
+                val params: ViewGroup.LayoutParams = imageView.layoutParams
+                params.height = if (isExpandedPicture) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+                imageView.layoutParams = params
+                imageView.scaleType = if (isExpandedPicture) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+            }
+        }
+    }
+
     private fun renderData(data: PictureOfTheDayData) = with (binding) {
         when (data) {
             is PictureOfTheDayData.Success -> {
@@ -117,7 +142,7 @@ class PictureOfTheDayFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast(getString(R.string.msg_linkisempty))
                 } else {
-                    image_view.load(url) {
+                    imageView.load(url) {
                         lifecycle(this@PictureOfTheDayFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
@@ -130,6 +155,7 @@ class PictureOfTheDayFragment : Fragment() {
                         pictureMotionLayout.transitionToEnd()
                     }
 
+                    setPictureClickListener()
                 }
             }
             is PictureOfTheDayData.Loading -> {
