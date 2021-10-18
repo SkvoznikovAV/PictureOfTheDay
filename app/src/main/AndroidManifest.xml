@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppEarthTheme">
         <activity
+            android:name=".notes.activities.NotesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.PreviousPictureOfTheDayActivity"
             android:exported="true" />
         <activity

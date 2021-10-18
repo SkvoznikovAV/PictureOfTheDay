@@ -100,7 +100,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
             android.R.id.home -> {
                 activity?.let {
-                    PictureBottomMenuFragment().show(it.supportFragmentManager, "tag")
+                    PictureBottomMenuFragment().show(it.supportFragmentManager, null)
                 }
             }
             R.id.app_bar_refresh -> {
