@@ -1,8 +1,8 @@
 <resources>
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:fontFamily">@font/droid_sans</item>
-        <item name="colorTextChipsOn">@color/colorTextChipsOnMars</item>
-        <item name="colorTextChipsOff">@color/colorTextChipsOffMars</item>
+        <item name="colorTextChipsOn">@color/colorTextChipsOn</item>
+        <item name="colorTextChipsOff">@color/colorTextChipsOff</item>
     </style>
 
     <style name="BaseTheme.Splash">

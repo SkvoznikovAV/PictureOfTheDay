@@ -3,6 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorTextChipsOn">#000000</color>
+    <color name="colorTextChipsOff">#000000</color>
 
     //Earth theme colors
     <color name="colorPrimaryEarth">#2a9cc9</color>
@@ -12,8 +14,6 @@
     <color name="colorWindowBackgroundEarth">#ccfccf</color>
     <color name="colorBackgroundChipsOnEarth">#fce935</color>
     <color name="colorBackgroundChipsOffEarth">#bbe0fc</color>
-    <color name="colorTextChipsOnEarth">#000000</color>
-    <color name="colorTextChipsOffEarth">#000000</color>
 
     //Mars theme colors
     <color name="colorPrimaryMars">#6b070b</color>
@@ -23,8 +23,6 @@
     <color name="colorWindowBackgroundMars">#fd9a88</color>
     <color name="colorBackgroundChipsOnMars">#de87e3</color>
     <color name="colorBackgroundChipsOffMars">#dee1e3</color>
-    <color name="colorTextChipsOnMars">#000000</color>
-    <color name="colorTextChipsOffMars">#000000</color>
 
     //Moon theme colors
     <color name="colorPrimaryMoon">#004099</color>
@@ -34,8 +32,6 @@
     <color name="colorWindowBackgroundMoon">#e6e6e6</color>
     <color name="colorBackgroundChipsOnMoon">#009900</color>
     <color name="colorBackgroundChipsOffMoon">#ffffff</color>
-    <color name="colorTextChipsOnMoon">#000000</color>
-    <color name="colorTextChipsOffMoon">#000000</color>
 
     //common colors
     <color name="color_gray">#66000000</color>
