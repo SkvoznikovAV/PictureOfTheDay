@@ -3,7 +3,7 @@
     <dimen name="txt_error_size">34sp</dimen>
     <dimen name="settings_header_size">30sp</dimen>
     <dimen name="description_header_size">20sp</dimen>
-    <dimen name="description_body_size">15sp</dimen>
+    <dimen name="description_body_size">17sp</dimen>
     <dimen name="description_header_margin_top">5dp</dimen>
     <dimen name="settings_header_theme_size">18sp</dimen>
     <dimen name="header_about_program_size">24sp</dimen>
@@ -16,4 +16,5 @@
     <dimen name="dialog_note_btn_margin">10dp</dimen>
     <dimen name="note_date_text_size">13sp</dimen>
     <dimen name="max_height_icon_delete">34dp</dimen>
+    <dimen name="body_description_padding">10dp</dimen>
 </resources>

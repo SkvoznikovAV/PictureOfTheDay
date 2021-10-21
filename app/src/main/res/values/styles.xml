@@ -1,5 +1,9 @@
 <resources>
-    <style name="AppEarthTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:fontFamily">@font/droid_sans</item>
+    </style>
+
+    <style name="AppEarthTheme" parent="BaseTheme">
         <item name="colorPrimary">@color/colorPrimaryEarth</item>
         <item name="colorPrimaryDark">@color/colorPrimaryEarthDark</item>
         <item name="colorAccent">@color/colorAccentEarth</item>
@@ -11,7 +15,7 @@
         <item name="colorTextChipsOff">@color/colorTextChipsOffEarth</item>
     </style>
 
-    <style name="AppMarsTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppMarsTheme" parent="BaseTheme">
         <item name="colorPrimary">@color/colorPrimaryMars</item>
         <item name="colorPrimaryDark">@color/colorPrimaryMarsDark</item>
         <item name="colorAccent">@color/colorAccentMars</item>
@@ -23,7 +27,7 @@
         <item name="colorTextChipsOff">@color/colorTextChipsOffMars</item>
     </style>
 
-    <style name="AppMoonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppMoonTheme" parent="BaseTheme">
         <item name="colorPrimary">@color/colorPrimaryMoon</item>
         <item name="colorPrimaryDark">@color/colorPrimaryMoonDark</item>
         <item name="colorAccent">@color/colorAccentMoon</item>

@@ -1,12 +1,20 @@
 package geekbarains.material.ui.fragments
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
@@ -21,12 +29,12 @@ import geekbarains.material.ui.viewModels.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.picture_of_the_day_description.*
 import geekbarains.material.databinding.FragmentPictureOfTheDayBinding
+import geekbarains.material.util.EquilateralImageView
 import kotlinx.android.synthetic.main.fragment_prev_picture_of_the_day.*
 
-class PictureOfTheDayFragment : Fragment() {
+class PictureOfTheDayFragment : PictureOfTheDayBaseFragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
-    private var isExpandedPicture = false
 
     private lateinit var pictureDescriptionBottomSheetBehavior: BottomSheetBehavior<View>
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -51,7 +59,11 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun loadAndRenderData(){
-        viewModel.getData().observe(this@PictureOfTheDayFragment, { renderData(it) })
+        viewModel.getData().observe(this@PictureOfTheDayFragment, { renderDataLoc(it) })
+    }
+
+    private fun refreshData(){
+        viewModel.getData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,73 +116,30 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
             R.id.app_bar_refresh -> {
-                loadAndRenderData()
+                refreshData()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setPictureClickListener(){
-        with (binding) {
-            imageView.setOnClickListener {
-                isExpandedPicture = !isExpandedPicture
+    private fun renderDataLoc(data: PictureOfTheDayData) = with (binding) {
+        renderData(data,
+            pictureOfTheDayLoadingLayout,
+            pictureOfTheDayErrorLayout,
+            pictureOfTheDayLayout,
+            pictureOfTheDayDescriptionContainer,
+            imageView,
+            pictureMotionLayout,
+            this@PictureOfTheDayFragment,
+            txtError
+        )
 
-                TransitionManager.beginDelayedTransition(
-                    pictureMotionLayout, TransitionSet()
-                        .addTransition(ChangeBounds())
-                        .addTransition(ChangeImageTransform())
-                )
-
-                val params: ViewGroup.LayoutParams = imageView.layoutParams
-                params.height = if (isExpandedPicture) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
-                imageView.layoutParams = params
-                imageView.scaleType = if (isExpandedPicture) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
-            }
-        }
-    }
-
-    private fun renderData(data: PictureOfTheDayData) = with (binding) {
         when (data) {
             is PictureOfTheDayData.Success -> {
-                pictureOfTheDayLoadingLayout.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.GONE
-                pictureOfTheDayLayout.visibility = View.VISIBLE
-                pictureOfTheDayDescriptionContainer.visibility = View.VISIBLE
-
-                val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
-                if (url.isNullOrEmpty()) {
-                    toast(getString(R.string.msg_linkisempty))
-                } else {
-                    imageView.load(url) {
-                        lifecycle(this@PictureOfTheDayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-                    }
-                    bottom_sheet_description_header.text = serverResponseData.title
-                    bottom_sheet_description.text = serverResponseData.explanation
-
-                    wikiButton.setOnClickListener {
-                        pictureMotionLayout.setTransition(R.id.starting_wiki,R.id.ending_wiki)
-                        pictureMotionLayout.transitionToEnd()
-                    }
-
-                    setPictureClickListener()
+                wikiButton.setOnClickListener {
+                    pictureMotionLayout.setTransition(R.id.starting_wiki, R.id.ending_wiki)
+                    pictureMotionLayout.transitionToEnd()
                 }
-            }
-            is PictureOfTheDayData.Loading -> {
-                pictureOfTheDayLayout.visibility = View.GONE
-                pictureOfTheDayDescriptionContainer.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.GONE
-                pictureOfTheDayLoadingLayout.visibility = View.VISIBLE
-            }
-            is PictureOfTheDayData.Error -> {
-                pictureOfTheDayLayout.visibility = View.GONE
-                pictureOfTheDayDescriptionContainer.visibility = View.GONE
-                pictureOfTheDayLoadingLayout.visibility = View.GONE
-                pictureOfTheDayErrorLayout.visibility = View.VISIBLE
-
-                txtError.text=String.format("%s %s",getString(R.string.str_prefix_error),data.error.message)
             }
         }
     }
