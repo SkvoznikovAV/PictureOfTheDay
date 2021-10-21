@@ -1,6 +1,12 @@
 <resources>
     <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:fontFamily">@font/droid_sans</item>
+        <item name="colorTextChipsOn">@color/colorTextChipsOn</item>
+        <item name="colorTextChipsOff">@color/colorTextChipsOff</item>
+    </style>
+
+    <style name="BaseTheme.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="AppEarthTheme" parent="BaseTheme">
@@ -11,8 +17,6 @@
         <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetEarth</item>
         <item name="backgroundChipsOn">@color/colorBackgroundChipsOnEarth</item>
         <item name="backgroundChipsOff">@color/colorBackgroundChipsOffEarth</item>
-        <item name="colorTextChipsOn">@color/colorTextChipsOnEarth</item>
-        <item name="colorTextChipsOff">@color/colorTextChipsOffEarth</item>
     </style>
 
     <style name="AppMarsTheme" parent="BaseTheme">
@@ -23,8 +27,6 @@
         <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetMars</item>
         <item name="backgroundChipsOn">@color/colorBackgroundChipsOnMars</item>
         <item name="backgroundChipsOff">@color/colorBackgroundChipsOffMars</item>
-        <item name="colorTextChipsOn">@color/colorTextChipsOnMars</item>
-        <item name="colorTextChipsOff">@color/colorTextChipsOffMars</item>
     </style>
 
     <style name="AppMoonTheme" parent="BaseTheme">
@@ -35,8 +37,6 @@
         <item name="backgroundBottomSheet">@color/colorBackgroundBottomSheetMoon</item>
         <item name="backgroundChipsOn">@color/colorBackgroundChipsOnMoon</item>
         <item name="backgroundChipsOff">@color/colorBackgroundChipsOffMoon</item>
-        <item name="colorTextChipsOn">@color/colorTextChipsOnMoon</item>
-        <item name="colorTextChipsOff">@color/colorTextChipsOffMoon</item>
     </style>
 
     <style name="ChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">

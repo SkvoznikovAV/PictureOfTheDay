@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppEarthTheme">
+        android:theme="@style/BaseTheme.Splash">
         <activity
             android:name=".notes.activities.NotesActivity"
             android:exported="false" />
